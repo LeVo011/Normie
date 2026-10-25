@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Normie | Schema Normalizer</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">AI-Assisted Database Design</p>
+      <h1>Normie</h1>
+    </div>
+    <nav aria-label="Product links">
+      <span class="connection-status" id="connectionStatus">Checking Groq status...</span>
+      <a href="/docs" target="_blank" rel="noreferrer">API docs</a>
+      <a href="/examples" target="_blank" rel="noreferrer">Examples</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="panel input-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Input</p>
+            <h2 id="workspace-title">Describe a domain or paste SQL DDL</h2>
+          </div>
+          <div class="sample-actions" aria-label="Demo samples">
+            <button class="secondary-button" id="loadTextSample" type="button">Load text demo</button>
+            <button class="secondary-button" id="loadSqlSample" type="button">Load SQL demo</button>
+          </div>
+        </div>
+
+        <label for="sourceText">Requirement or CREATE TABLE statement</label>
+        <textarea id="sourceText" spellcheck="false" placeholder="Example: Students enroll in courses each semester..."></textarea>
+
+        <div class="controls">
+          <fieldset>
+            <legend>Target normal form</legend>
+            <label class="choice"><input type="radio" name="normalForm" value="3NF" checked> 3NF</label>
+            <label class="choice"><input type="radio" name="normalForm" value="BCNF"> BCNF</label>
+          </fieldset>
+          <label class="check"><input type="checkbox" id="verifySchema"> Run verifier and allow one refinement pass</label>
+        </div>
+
+        <button class="primary-button" id="normalizeButton" type="button">Normalize schema</button>
+        <p class="hint">The demo samples run without a Groq key. Other inputs use <code>GROQ_API_KEY</code> from your <code>.env</code>.</p>
+      </div>
+
+      <div class="panel output-panel" aria-live="polite">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Output</p>
+            <h2>Normalized schema</h2>
+          </div>
+          <span class="status" id="status">Ready</span>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          Run a demo or submit your own input to inspect the decomposition, generated SQL, report, and ER diagram.
+        </div>
+
+        <div id="result" hidden>
+          <div id="summary" class="summary"></div>
+          <div class="tabs" role="tablist" aria-label="Output views">
+            <button role="tab" aria-selected="true" data-tab="schema" type="button">Schema</button>
+            <button role="tab" aria-selected="false" data-tab="sql" type="button">SQL</button>
+            <button role="tab" aria-selected="false" data-tab="report" type="button">Report</button>
+            <button role="tab" aria-selected="false" data-tab="erd" type="button">ERD</button>
+          </div>
+          <section class="tab-panel" id="schemaPanel"></section>
+          <pre class="tab-panel" id="sqlPanel" hidden></pre>
+          <pre class="tab-panel" id="reportPanel" hidden></pre>
+          <pre class="tab-panel" id="erdPanel" hidden></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

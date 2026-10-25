@@ -183,26 +183,6 @@ The test suite covers closure computation, candidate-key detection, 1NF/2NF/3NF 
 - SQL types, table names, and foreign-key choices use practical heuristics and may need domain-specific adjustments.
 - This is a course-project prototype, so it intentionally has no user authentication, persistence, or production deployment setup.
 
-## Publish to GitHub
-
-Before pushing, make sure your API key is not staged:
-
-```powershell
-git status
-git add .
-git status
-```
-
-Create an empty GitHub repository named `normie`, then run:
-
-```powershell
-git commit -m "Initial release of Normie"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/normie.git
-git push -u origin main
-```
-
-Never commit `.env`, API keys, or tokens. If a key is ever pushed accidentally, revoke it in the provider dashboard immediately.
 
 ## Tech stack
 
